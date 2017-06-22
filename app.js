@@ -1,7 +1,9 @@
+
 'use strict';
 
 var orders = []
 var images = []
+
 
 function Order(email, first, last, address, cc) {
   this.firstName = first;
@@ -9,7 +11,6 @@ function Order(email, first, last, address, cc) {
   this.email = email;
   this.address = address;
   this.cc = cc;
-  orders.push(this);
 };
 
 function Pic(name, path) {
@@ -26,28 +27,10 @@ function convertForm() {
   var email = document.getElementById('email');
   var address = document.getElementById('address');
   var cc = document.getElementById('cc#')
-  new Order(email, firstName, lastName, address, cc);
-  pushOrder();
-}
+  Order(email, firstName, lastName, address, cc);
 
-var theForm = document.getElementById('theForm');
-var btn = document.getElementById('btn');
+var allOrders = []
 
-function pushOrder() {
-  localStorage.clear();
-  var ordersJSON = JSON.stringify(orders);
-  localStorage.orders = ordersJSON;
-}
-
-function pullOrder() {
-  var retrievedOrder = localStorage.orders;
-  var parsedOrder = JSON.parse(retrievedOrder);
-  for (var i = 0; i < parsedOrder.length; i++) {
-    orders[i] = parsedOrder[i];
-  }
-}
-
-theForm.addEventListener('submit', convertForm);
 
 new Pic('bag','assets/bag.jpg');
 new Pic('banana', 'assets/banana.jpg');
@@ -74,6 +57,7 @@ if (localStorage) {
   pullOrder;
 }
 
+
 Order.prototype.render = function() {
   var trEl = document.createElement('tr');
 
@@ -93,3 +77,4 @@ Order.prototype.render = function() {
 
 
 }
+
