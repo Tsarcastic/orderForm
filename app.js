@@ -19,9 +19,28 @@ function convertForm() {
   var address = document.getElementById('address');
   var cc = document.getElementById('cc#')
   new Order(email, firstName, lastName, address, cc);
+  pushOrder();
 }
 
 var theForm = document.getElementById('theForm');
 var btn = document.getElementById('btn');
 
-theForm.addEventListener('submit', convertForm)
+function pushOrder() {
+  localStorage.clear();
+  var ordersJSON = JSON.stringify(orders);
+  localStorage.orders = ordersJSON;
+}
+
+function pullOrder() {
+  var retrievedOrder = localStorage.orders;
+  var parsedOrder = JSON.parse(retrievedOrder);
+  for (var i = 0; i < parsedOrder.length; i++) {
+    orders[i] = parsedOrder[i];
+  }
+}
+
+theForm.addEventListener('submit', convertForm);
+
+if (localStorage) {
+  pullOrder;
+}
