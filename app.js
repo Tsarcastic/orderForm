@@ -1,4 +1,9 @@
-'use strict'
+
+'use strict';
+
+var orders = []
+var images = []
+
 
 function Order(email, first, last, address, cc) {
   this.firstName = first;
@@ -7,6 +12,12 @@ function Order(email, first, last, address, cc) {
   this.address = address;
   this.cc = cc;
 };
+
+function Pic(name, path) {
+  this.id = name;
+  this.path = path;
+  images.push(this)
+}
 
 function convertForm() {
   var firstName = document.getElementById('firstName');
@@ -18,9 +29,29 @@ function convertForm() {
 
 var allOrders = []
 
-orders[i]
-orders[i].this.firstName
-orders[i].this.lastName
-orders[i].this.address
-orders[i].this.creditCard
-orders[i].this.product
+
+new Pic('bag','assets/bag.jpg');
+new Pic('banana', 'assets/banana.jpg');
+new Pic('bathroom', 'assets/bathroom.jpg');
+new Pic('boots', 'assets/boots.jpg');
+new Pic('breakfast', 'assets/breakfast.jpg');
+new Pic('bubblegum', 'assets/bubblegum.jpg');
+new Pic('chair', 'assets/chair.jpg');
+new Pic('cthulhu', 'assets/cthulhu.jpg');
+new Pic('dog-duck', 'assets/dog-duck.jpg');
+new Pic('dragon', 'assets/dragon.jpg');
+new Pic('pen', 'assets/pen.jpg');
+new Pic('pet-sweep', 'assets/pet-sweep.jpg');
+new Pic('scissors', 'assets/scissors.jpg');
+new Pic('shark', 'assets/shark.jpg');
+new Pic('sweep', 'assets/sweep.png');
+new Pic('tauntaun', 'assets/tauntaun.jpg');
+new Pic('unicorn', 'assets/unicorn.jpg');
+new Pic('usb', 'assets/usb.gif');
+new Pic('water-can.jpg', 'assets/water-can.jpg');
+new Pic('wine-glass.jpg', 'assets/wine-glass.jpg');
+
+if (localStorage) {
+  pullOrder;
+}
+
