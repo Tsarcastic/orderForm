@@ -1,6 +1,6 @@
 'use strict';
 
-var orders
+var orders = []
 
 function Order(email, first, last, address, cc) {
   this.firstName = first;
@@ -8,7 +8,7 @@ function Order(email, first, last, address, cc) {
   this.email = email;
   this.address = address;
   this.cc = cc;
-  orders = []
+  orders.push(this);
 };
 
 function convertForm() {
