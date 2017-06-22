@@ -20,6 +20,7 @@ function Pic(name, path) {
 
 function convertForm() {
   event.preventDefault();
+  var value = document.getElementById('items');
   var firstName = document.getElementById('firstName');
   var lastName = document.getElementById('lastName');
   var email = document.getElementById('email');
@@ -71,4 +72,24 @@ new Pic('wine-glass.jpg', 'assets/wine-glass.jpg');
 
 if (localStorage) {
   pullOrder;
+}
+
+Order.prototype.render = function() {
+  var trEl = document.createElement('tr');
+
+  var imgEl = document.createElement('img');
+  imgEl.src= this.path;
+  imgEl.id = this.id;
+  trEl.appendChild(imgEl);
+
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.firstName;
+  trEl.appendChild(tdEl);
+
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.lastName;
+  trEl.appendChild(tdEl);
+
+
+
 }
