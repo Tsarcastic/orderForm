@@ -26,7 +26,7 @@ function convertForm() {
   var email = document.getElementById('email').value;
   var address = document.getElementById('address').value;
   var cc = document.getElementById('cc#').value;
-  var value = document.getElementById('items'); //"Cannot read property of null"
+  var value = document.getElementById('items').innerHTML; //"Cannot read property of null"
   new Order(value, email, firstName, lastName, address, cc);
   pushOrder();
 }
@@ -80,14 +80,14 @@ Order.prototype.render = function() {
   var trEl = document.createElement('tr');
   console.log('this is working')
 
-  var imgEl = document.createElement('img');
-  imgEl.src= this.path;
-  imgEl.id = this.id;
-  trEl.appendChild(imgEl);
+  // var imgEl = document.createElement('img');
+  // imgEl.src= this.path;
+  // imgEl.id = this.id;
+  // trEl.appendChild(imgEl);
 
-  var tdEl = document.createElement('td');
-  tdEl.textContent = this.value;
-  trEl.appendChild(tdEl);
+  // var tdEl = document.createElement('td');
+  // tdEl.textContent = this.value;
+  // trEl.appendChild(tdEl);
 
   var tdEl = document.createElement('td');
   tdEl.textContent = this.firstName;
