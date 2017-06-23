@@ -1,16 +1,16 @@
-
 'use strict';
 
 var orders = []
 var images = []
 
-
-function Order(email, first, last, address, cc) {
+function Order(value, email, first, last, address, cc) {
+  this.value = value;
   this.firstName = first;
   this.lastName = last;
   this.email = email;
   this.address = address;
   this.cc = cc;
+  orders.push(this);
 };
 
 function Pic(name, path) {
@@ -21,16 +21,35 @@ function Pic(name, path) {
 
 function convertForm() {
   event.preventDefault();
-  var value = document.getElementById('items');
-  var firstName = document.getElementById('firstName');
-  var lastName = document.getElementById('lastName');
-  var email = document.getElementById('email');
-  var address = document.getElementById('address');
-  var cc = document.getElementById('cc#')
-  Order(email, firstName, lastName, address, cc);
+  var firstName = document.getElementById('firstName').value;
+  var lastName = document.getElementById('lastName').value;
+  var email = document.getElementById('email').value;
+  var address = document.getElementById('address').value;
+  var cc = document.getElementById('cc#').value;
+  var value = document.getElementById('items'); //"Cannot read property of null"
+  new Order(value, email, firstName, lastName, address, cc);
+  pushOrder();
+}
 
-var allOrders = []
+var theForm = document.getElementById('theForm');
+var btn = document.getElementById('btn');
+var app = document.getElementById('append')
 
+function pushOrder() {
+  localStorage.clear();
+  var ordersJSON = JSON.stringify(orders);
+  localStorage.orders = ordersJSON;
+}
+
+function pullOrder() {
+  var retrievedOrder = localStorage.orders;
+  var parsedOrder = JSON.parse(retrievedOrder);
+  for (var i = 0; i < parsedOrder.length; i++) {
+    orders[i] = parsedOrder[i];
+  }
+}
+
+theForm.addEventListener('submit', convertForm);
 
 new Pic('bag','assets/bag.jpg');
 new Pic('banana', 'assets/banana.jpg');
@@ -57,16 +76,20 @@ if (localStorage) {
   pullOrder;
 }
 
-
 Order.prototype.render = function() {
   var trEl = document.createElement('tr');
+  console.log('this is working')
 
   var imgEl = document.createElement('img');
   imgEl.src= this.path;
   imgEl.id = this.id;
   trEl.appendChild(imgEl);
 
-  tdEl = document.createElement('td');
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.value;
+  trEl.appendChild(tdEl);
+
+  var tdEl = document.createElement('td');
   tdEl.textContent = this.firstName;
   trEl.appendChild(tdEl);
 
@@ -74,7 +97,13 @@ Order.prototype.render = function() {
   tdEl.textContent = this.lastName;
   trEl.appendChild(tdEl);
 
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.email;
+  trEl.appendChild(tdEl);
 
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.address;
+  trEl.appendChild(tdEl);
 
+  app.appendChild(trEl);
 }
-
